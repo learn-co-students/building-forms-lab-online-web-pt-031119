@@ -1,14 +1,40 @@
 // Add BandInput component
 import React, { Component } from 'react'
 
+
+
 class BandInput extends Component {
+
+  state = {
+    name: ''
+  }
+
+  handleOnChange = event => {
+    this.setState({
+      name: event.target.value
+    })
+  }
+
+  handleOnSubmit = event => {
+    event.preventDefault();
+    const band = this.state;
+    this.props.addBand(band);
+    this.setState({
+      name: ''
+    })
+}
+
   render() {
     return(
       <div>
         Band Input
+        <form onSubmit={(event) => this.handleOnSubmit(event)}>
+          <input name="name" type="text" onChange={(event) => this.handleOnChange(event)} />
+          <button type="submit">Add Band</button>
+        </ form>
       </div>
     )
   }
 }
 
-export default BandInput
+export default BandInput;
